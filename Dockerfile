@@ -7,10 +7,9 @@ RUN mkdir /app
 
 ADD scripts /scripts/
 RUN chmod +x /scripts/provisioning.sh
-
-
-EXPOSE 3000
+RUN chmod +x /scripts/init.sh
 
 CMD /scripts/provisioning.sh
+CMD /scripts/init.sh
 
-
+EXPOSE 3000
