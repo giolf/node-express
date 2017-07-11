@@ -2,11 +2,12 @@ FROM node
 
 MAINTAINER Giovanni Far <giovanni.far@gmail.com>
 
-COPY scripts/ / 
+RUN mkdir /scripts
+RUN mkdir /app
+
+ADD scripts /scripts/
 RUN chmod +x /scripts/provisioning.sh
 
-
-RUN mkdir /app
 
 EXPOSE 3000
 
