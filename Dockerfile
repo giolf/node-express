@@ -9,6 +9,6 @@ ADD scripts /scripts/
 RUN chmod +x /scripts/provisioning.sh
 RUN chmod +x /scripts/init.sh
 
-CMD /scripts/provisioning.sh
+RUN /scripts/provisioning.sh
 
 EXPOSE 3000
