@@ -8,7 +8,7 @@ RUN mkdir /app
 ADD scripts /scripts/
 
 RUN chmod +x /scripts/provisioning.sh
-RUN chmod +x /scripts/init.sh
+RUN chmod +x /scripts/docker-entrypoint.sh
 RUN /scripts/provisioning.sh
 
 EXPOSE 3000
