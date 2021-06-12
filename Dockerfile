@@ -1,6 +1,6 @@
 FROM node
 
-MAINTAINER Giovanni Farr <giovanni.far@gmail.com>
+MAINTAINER Giovanni Farrr <giovanni.far@gmail.com>
 
 RUN mkdir /scripts
 RUN mkdir /app
