@@ -8,13 +8,13 @@ on:
 
 jobs:
   install:
-#    if: ${{ github.event_name == 'pull_request' }}
+#   if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install and cache NPM dependencies
-          id: cache-NPM-Dependencies
+          id: cacheNodeDependencies
           uses: actions/cache@v2
           env:
             cache-name: cache-node-modules
