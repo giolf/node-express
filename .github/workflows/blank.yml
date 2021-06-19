@@ -39,8 +39,7 @@ jobs:
       - name: Check branch name
         run: |
           if [[ ! ${{ github.ref }} =~ ^refs/heads/[feature|release]GP-[0-9]++$ ]]; then
-              echo "::error:: Invalid branch name"
-              exit 1
+              echo "::error::Invalid branch name"
           fi
   check-branch-commit-messages:
      # if: ${{ github.event_name == 'pull_request' }}
