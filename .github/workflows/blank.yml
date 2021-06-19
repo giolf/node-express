@@ -7,8 +7,7 @@ on:
     branches: [ master, develop, test4 ]
 
 jobs:
-  install:
-#   if: ${{ github.event_name == 'pull_request' }}
+  install and cache:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,4 +28,17 @@ jobs:
       - name: Install NPM Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
+  check:
+    # if: ${{ github.event_name == 'pull_request' }}
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Check pull request branch name
+        run: |
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
+  
+  
         
