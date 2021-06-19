@@ -7,7 +7,7 @@ on:
     branches: [ master, develop, test4 ]
 
 jobs:
-  install-and-cache:
+  install-and-cache-dependencies:
     # if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
@@ -29,17 +29,23 @@ jobs:
       - name: Install NPM Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
-  check-branch:
+  check-branch-name:
     # if: ${{ github.event_name == 'pull_request' }}
-    needs: install-and-cache
+    needs: install-and-cache-dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Check branch name
         run: |
-          echo ${{ github.head_ref }}
-          echo ${{ github.ref }}
-  
+          if [[ ! ${{ github.ref }} =~ ^refs/heads/[feature|release]GP-[0-9]++$ ]]; then
+              echo "::error:: Invalid branch name"
+              exit 1
+          fi
+  check-branch-commit-messages:
+     # if: ${{ github.event_name == 'pull_request' }}
+    needs: install-and-cache-dependencies
+    runs-on: ubuntu-latest
+
   
         
