@@ -4,7 +4,7 @@ on:
   push:
     branches: [ develop, test4 ]
   pull_request:
-    branches: [ master, develop, test4 ]
+    branches: [ master, develop ]
 
 jobs:
   install-and-cache:
