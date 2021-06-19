@@ -8,7 +8,7 @@ on:
 
 jobs:
   install-and-cache:
-    # if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,7 +30,7 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
   check-pull-request:
-    # if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     needs: install-and-cache
     runs-on: ubuntu-latest
     steps:
