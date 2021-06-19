@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Check branch name
         run: |
-          if [[ ! ${{ github.ref }} =~ ^refs/heads/[feature|release]GP-[0-9]++$ ]]; then
+          if [[ ! ${{ github.ref }} =~ ^refs\/heads\/(feature|release)\/GP-[0-9]+$ ]]; then
               echo "::error::Invalid branch name"
               exit 1
           fi
