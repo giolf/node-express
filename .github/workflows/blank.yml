@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v2
         id: npm-cache
         with:
-          path: ~/.npm
+          path: ./node_modules
           key: ${{ hashFiles('**/package-lock.json') }}
       - name: Install NPM Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
@@ -47,15 +47,10 @@ jobs:
       - name: Fetch NPM cache
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: ./node_modules
           key: ${{ hashFiles('**/package-lock.json') }}
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
       - name: Check branch commit messages
-        run: |
-          npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
   
         
