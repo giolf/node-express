@@ -24,6 +24,7 @@ jobs:
         run: npm install
   check-branch-name:
     if: ${{ github.event_name == 'pull_request' }}
+    needs: install-and-cache
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
