@@ -32,7 +32,7 @@ jobs:
       - name: Check branch name
         run: |
           chmod +x "./.github/workflows/sh/check_branch_name.sh"
-          "./.github/workflows/sh/check_branch_name.sh ${{ github.base_ref }} ${{ github.head_ref }}"
+          sh "./.github/workflows/sh/check_branch_name.sh ${{ github.base_ref }} ${{ github.head_ref }}"
   check-branch-commit-messages:
     if: ${{ github.event_name == 'pull_request' }}
     needs: install-and-cache
