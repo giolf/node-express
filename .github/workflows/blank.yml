@@ -30,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Check branch name
-        run: chmod +x "./.github/workflows/sh/check_branch_name.sh ${{ github.base_ref }} ${{ github.head_ref }}"
+        run: chmod +x "${GITHUB_WORKSPACE}/.github/workflows/sh/check_branch_name.sh ${{ github.base_ref }} ${{ github.head_ref }}"
   check-branch-commit-messages:
     if: ${{ github.event_name == 'pull_request' }}
     needs: install-and-cache
