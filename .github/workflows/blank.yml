@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ develop, test4 ]
+    branches: [ master, test4 ]
   pull_request:
     branches: [ master, develop ]
 
@@ -31,8 +31,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Check branch name
         run: |
-          if [[ ! ${{ github.head_ref }} =~ ^(feature|release)\/GP-[0-9]+$ ]]; then
-              echo "::error::Invalid branch name"
+          if [[ ${{ github.base_ref }} == "develop" ]] && [[ ! ${{ github.head_ref }} =~ ^feature\/GP-[0-9]+$ ]]; then
+              echo "::error::Error message for dev"
+              exit 1
+          fi
+          if [[ ${{ github.base_ref }} == "master" ]] && [[ ! ${{ github.head_ref }} =~ ^(release|hotfix)\/GP-[0-9]+$ ]]; then
+              echo "::error::Error message for master"
               exit 1
           fi
   check-branch-commit-messages:
