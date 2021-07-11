@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ develop, test4 ]
+    branches: [ master, develop ]
   pull_request:
     branches: [ master, develop ]
 
@@ -31,10 +31,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Check branch name
         run: |
-          if [[ ! ${{ github.head_ref }} =~ ^(feature|release)\/GP-[0-9]+$ ]]; then
-              echo "::error::Invalid branch name"
-              exit 1
-          fi
+          chmod +x ./.github/workflows/sh/check_branch_name.sh
+          ./.github/workflows/sh/check_branch_name.sh "${{ github.base_ref }}" "${{ github.head_ref }}"
   check-branch-commit-messages:
     if: ${{ github.event_name == 'pull_request' }}
     needs: install-and-cache
@@ -50,7 +48,9 @@ jobs:
           path: ./node_modules
           key: ${{ hashFiles('**/package-lock.json') }}
       - name: Check branch commit messages
-        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run: |
+          chmod +x ./.github/workflows/sh/check_commit_messages.sh
+          ./.github/workflows/sh/check_commit_messages.sh "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
 
 
 
